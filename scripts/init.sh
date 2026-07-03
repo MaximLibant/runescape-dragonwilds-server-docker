@@ -35,20 +35,11 @@ fi
 CONFIG_DIR="/home/steam/server-files/RSDragonwilds/Saved/Config/LinuxServer"
 CONFIG_FILE="$CONFIG_DIR/DedicatedServer.ini"
 
-mkdir -p "$CONFIG_DIR"
-LogInfo "Writing DedicatedServer.ini"
-envsubst > "$CONFIG_FILE" << 'TEMPLATE'
-[SectionsToSave]
-bCanSaveAllSections=true
-
-[/Script/Dominion.DedicatedServerSettings]
-AdminPassword=${ADMIN_PASSWORD}
-OwnerId=${OWNER_ID}
-WorldPassword=${WORLD_PASSWORD}
-ServerName=${SERVER_NAME}
-DefaultWorldName=${DEFAULT_WORLD_NAME}
-ServerGuid=
-TEMPLATE
+LogInfo "Updating DedicatedServer.ini"
+if ! write_dedicated_server_config "$CONFIG_FILE"; then
+    LogError "Failed to update DedicatedServer.ini"
+    exit 1
+fi
 chown steam:steam "$CONFIG_FILE"
 
 # shellcheck disable=SC2317
