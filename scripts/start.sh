@@ -23,11 +23,10 @@ LogInfo "Server starting on port ${DEFAULT_PORT} (UDP)"
 LogInfo "Server name: ${SERVER_NAME}"
 LogInfo "Default world: ${DEFAULT_WORLD_NAME}"
 
-LAUNCH_ARGS="RSDragonwilds -log -NewConsole -Port=${DEFAULT_PORT} -ini:Game:[/Script/Engine.GameSession]:MaxPlayers=${MAX_PLAYERS}"
+build_launch_args
 
-if [ -n "${MULTIHOME}" ]; then
+if [ -n "${MULTIHOME:-}" ]; then
     LogInfo "Multihome: ${MULTIHOME}"
-    LAUNCH_ARGS="${LAUNCH_ARGS} -MULTIHOME=${MULTIHOME}"
 fi
 
-exec "$SERVER_EXEC" $LAUNCH_ARGS
+exec "$SERVER_EXEC" "${LAUNCH_ARGS[@]}"

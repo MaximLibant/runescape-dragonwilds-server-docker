@@ -1,22 +1,12 @@
-<!-- markdownlint-disable-next-line -->
-![marketing_assets_banner](https://github.com/user-attachments/assets/b8b4ae5c-06bb-46a7-8d94-903a04595036)
-[![GitHub License](https://img.shields.io/github/license/indifferentbroccoli/runescape-dragonwilds-server-docker?style=for-the-badge&color=6aa84f)](https://github.com/indifferentbroccoli/runescape-dragonwilds-server-docker/blob/main/LICENSE)
-[![GitHub Release](https://img.shields.io/github/v/release/indifferentbroccoli/runescape-dragonwilds-server-docker?style=for-the-badge&color=6aa84f)](https://github.com/indifferentbroccoli/runescape-dragonwilds-server-docker/releases)
-[![GitHub Repo stars](https://img.shields.io/github/stars/indifferentbroccoli/runescape-dragonwilds-server-docker?style=for-the-badge&color=6aa84f)](https://github.com/indifferentbroccoli/runescape-dragonwilds-server-docker)
-[![Discord](https://img.shields.io/discord/798321161082896395?style=for-the-badge&label=Discord&labelColor=5865F2&color=6aa84f)](https://discord.gg/indifferentbroccoli)
-[![Docker Pulls](https://img.shields.io/docker/pulls/indifferentbroccoli/runescape-dragonwilds-server-docker?style=for-the-badge&color=6aa84f)](https://hub.docker.com/r/indifferentbroccoli/runescape-dragonwilds-server-docker)
-
-Game server hosting
-
-Fast RAM, high-speed internet
-
-Eat lag for breakfast
-
-[Try our RuneScape: DragonWilds server hosting free for 2 days!](https://indifferentbroccoli.com/runescape-dragon-wilds-server-hosting)
-
 ## RuneScape: DragonWilds Dedicated Server Docker
 
 A Docker container for running a RuneScape: DragonWilds dedicated server using DepotDownloader.
+
+## Fork Notice
+
+This is a modified fork of [indifferentbroccoli/runescape-dragonwilds-server-docker](https://github.com/indifferentbroccoli/runescape-dragonwilds-server-docker). It was modified in July 2026 to preserve dedicated server configuration, pass world-selection settings more explicitly, and publish images to GitHub Container Registry.
+
+This fork remains licensed under GPL-3.0. See [LICENSE](LICENSE) for the full license text.
 
 ## Server Requirements
 
@@ -33,12 +23,18 @@ A Docker container for running a RuneScape: DragonWilds dedicated server using D
 
 Copy the `.env.example` file to a new file called `.env`. Then use either `docker compose` or `docker run`.
 
+This fork publishes images to GitHub Container Registry:
+
+```text
+ghcr.io/maximlibant/runescape-dragonwilds-server-docker:latest
+```
+
 ### Docker Compose
 
 ```yaml
 services:
   runescape-dragonwilds:
-    image: indifferentbroccoli/runescape-dragonwilds-server-docker
+    image: ghcr.io/maximlibant/runescape-dragonwilds-server-docker:latest
     restart: unless-stopped
     container_name: runescape-dragonwilds
     stop_grace_period: 30s
@@ -66,7 +62,7 @@ docker run -d \
     -p 7777:7777/udp \
     --env-file .env \
     -v ./server-files:/home/steam/server-files \
-    indifferentbroccoli/runescape-dragonwilds-server-docker
+    ghcr.io/maximlibant/runescape-dragonwilds-server-docker:latest
 ```
 
 ## Environment Variables
@@ -86,6 +82,12 @@ docker run -d \
 
 > [!NOTE]
 > If your server doesn't appear, check that UDP port 7777 is forwarded through your firewall/router and that `OWNER_ID` and `ADMIN_PASSWORD` are set.
+
+## Configuration Behavior
+
+On startup, this image updates the env-managed values in `DedicatedServer.ini` while preserving game-managed fields such as `ServerGuid`, `KnownPlayerList`, and other unmanaged settings.
+
+`DEFAULT_WORLD_NAME` is also passed as a launch override so recovery paths continue to target the configured world. If you rename or switch worlds, keep stale `.sav` files out of the active `SaveGames` directory so the game cannot select an old slot.
 
 ## Port Forwarding
 
