@@ -1,22 +1,12 @@
-<!-- markdownlint-disable-next-line -->
-![marketing_assets_banner](https://github.com/user-attachments/assets/b8b4ae5c-06bb-46a7-8d94-903a04595036)
-[![GitHub License](https://img.shields.io/github/license/indifferentbroccoli/runescape-dragonwilds-server-docker?style=for-the-badge&color=6aa84f)](https://github.com/indifferentbroccoli/runescape-dragonwilds-server-docker/blob/main/LICENSE)
-[![GitHub Release](https://img.shields.io/github/v/release/indifferentbroccoli/runescape-dragonwilds-server-docker?style=for-the-badge&color=6aa84f)](https://github.com/indifferentbroccoli/runescape-dragonwilds-server-docker/releases)
-[![GitHub Repo stars](https://img.shields.io/github/stars/indifferentbroccoli/runescape-dragonwilds-server-docker?style=for-the-badge&color=6aa84f)](https://github.com/indifferentbroccoli/runescape-dragonwilds-server-docker)
-[![Discord](https://img.shields.io/discord/798321161082896395?style=for-the-badge&label=Discord&labelColor=5865F2&color=6aa84f)](https://discord.gg/indifferentbroccoli)
-[![Docker Pulls](https://img.shields.io/docker/pulls/indifferentbroccoli/runescape-dragonwilds-server-docker?style=for-the-badge&color=6aa84f)](https://hub.docker.com/r/indifferentbroccoli/runescape-dragonwilds-server-docker)
-
-Game server hosting
-
-Fast RAM, high-speed internet
-
-Eat lag for breakfast
-
-[Try our RuneScape: DragonWilds server hosting free for 2 days!](https://indifferentbroccoli.com/runescape-dragon-wilds-server-hosting)
-
 ## RuneScape: DragonWilds Dedicated Server Docker
 
 A Docker container for running a RuneScape: DragonWilds dedicated server using DepotDownloader.
+
+## Fork Notice
+
+This is a modified fork of [indifferentbroccoli/runescape-dragonwilds-server-docker](https://github.com/indifferentbroccoli/runescape-dragonwilds-server-docker). It was modified in July 2026 to preserve dedicated server configuration, pass world-selection settings more explicitly, and publish images to GitHub Container Registry.
+
+This fork remains licensed under GPL-3.0. See [LICENSE](LICENSE) for the full license text.
 
 ## Server Requirements
 

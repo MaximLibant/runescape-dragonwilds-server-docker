@@ -29,10 +29,12 @@ RUN curl -sL "https://github.com/SteamRE/DepotDownloader/releases/download/Depot
 
 RUN useradd -m -s /bin/bash steam
 
-LABEL maintainer="support@indifferentbroccoli.com" \
-      name="indifferentbroccoli/runescape-dragonwilds-server-docker" \
-      github="https://github.com/indifferentbroccoli/runescape-dragonwilds-server-docker" \
-      dockerhub="https://hub.docker.com/r/indifferentbroccoli/runescape-dragonwilds-server-docker"
+LABEL org.opencontainers.image.title="runescape-dragonwilds-server-docker" \
+      org.opencontainers.image.description="RuneScape: DragonWilds dedicated server Docker image" \
+      org.opencontainers.image.source="https://github.com/MaximLibant/runescape-dragonwilds-server-docker" \
+      org.opencontainers.image.url="https://github.com/MaximLibant/runescape-dragonwilds-server-docker" \
+      org.opencontainers.image.licenses="GPL-3.0" \
+      org.opencontainers.image.vendor="MaximLibant"
 
 ENV HOME=/home/steam \
     DEFAULT_PORT=7777 \
@@ -48,6 +50,7 @@ ENV HOME=/home/steam \
 COPY ./scripts /home/steam/server/
 
 COPY branding /branding
+COPY LICENSE /licenses/GPL-3.0.txt
 
 RUN mkdir -p /home/steam/server-files && \
     chmod +x /home/steam/server/*.sh
