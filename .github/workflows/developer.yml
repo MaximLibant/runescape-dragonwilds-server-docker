@@ -39,6 +39,7 @@ jobs:
           images: |
             ${{ steps.image.outputs.name }}
           tags: |
+            type=raw,value=latest
             type=raw,value=dev,enable={{is_default_branch}}
             type=ref,event=branch
             type=sha,prefix=sha-
