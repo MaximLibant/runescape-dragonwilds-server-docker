@@ -33,12 +33,18 @@ A Docker container for running a RuneScape: DragonWilds dedicated server using D
 
 Copy the `.env.example` file to a new file called `.env`. Then use either `docker compose` or `docker run`.
 
+This fork publishes images to GitHub Container Registry:
+
+```text
+ghcr.io/maximlibant/runescape-dragonwilds-server-docker:latest
+```
+
 ### Docker Compose
 
 ```yaml
 services:
   runescape-dragonwilds:
-    image: indifferentbroccoli/runescape-dragonwilds-server-docker
+    image: ghcr.io/maximlibant/runescape-dragonwilds-server-docker:latest
     restart: unless-stopped
     container_name: runescape-dragonwilds
     stop_grace_period: 30s
@@ -66,7 +72,7 @@ docker run -d \
     -p 7777:7777/udp \
     --env-file .env \
     -v ./server-files:/home/steam/server-files \
-    indifferentbroccoli/runescape-dragonwilds-server-docker
+    ghcr.io/maximlibant/runescape-dragonwilds-server-docker:latest
 ```
 
 ## Environment Variables
@@ -86,6 +92,12 @@ docker run -d \
 
 > [!NOTE]
 > If your server doesn't appear, check that UDP port 7777 is forwarded through your firewall/router and that `OWNER_ID` and `ADMIN_PASSWORD` are set.
+
+## Configuration Behavior
+
+On startup, this image updates the env-managed values in `DedicatedServer.ini` while preserving game-managed fields such as `ServerGuid`, `KnownPlayerList`, and other unmanaged settings.
+
+`DEFAULT_WORLD_NAME` is also passed as a launch override so recovery paths continue to target the configured world. If you rename or switch worlds, keep stale `.sav` files out of the active `SaveGames` directory so the game cannot select an old slot.
 
 ## Port Forwarding
 
